@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <!--  Für die Navigation  zuständig und man kann die Größe Farbe und Backgroundfarbe bestimmen -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <!--  Für die Navigationselemente -->
+            <div class="container-fluid">
+<!-- Das Logo -->
+                <a class="navbar-brand" href="#">Navbar</a>
+                <!-- Der Botton um die Navigation auszuklappen -->
+                <button class="navbar-toggler-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarInhalt"
+                    aria-controls="navbarInhalt" aria-expanded="false" aria-label="Navigation aus-/einblenden">
+                    <!-- verweist auf data-bs-target zeigt den Collapse   -->
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarInhalt">
+                    <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
+                        <!-- Für die rechte Lage des Suchelage des Formular -->
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Produkte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kontakt</a>
+                        </li>
+                    </ul>
+
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Suche">
+                        <button class="btn btn-outline-success" type="submit">Suche</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Header</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  .carousel-item {
+    height: 600px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+/* Weiteres benutzerdefiniertes CSS hier */
+
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="bild1.jpeg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>LUNDEV</h5>
+                    <p>Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</p>
+                    <button class="btn btn-primary">See more</button>
+                </div>
+            </div>
+            <!-- Weitere carousel-item Elemente für jedes Bild -->
+
+            <div class="carousel-item active">
+              <img src="bild1.jpeg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>LUNDEV</h5>
+                  <p>Tinh ru anh di chay pho, chua kip chay pho thi anhchay mat tieu</p>
+                  <button class="btn btn-primary">See more</button>
+              </div>
+          </div>
+          <!-- Weitere carousel-item Elemente für jedes Bild -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

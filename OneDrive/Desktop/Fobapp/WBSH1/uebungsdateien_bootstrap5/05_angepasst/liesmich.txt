@@ -1,0 +1,10 @@
+Damit die Erzeugung der CSS-Dateien aus den SCSS-Dateien gelingt, müssen die anderen Bootstrap-Source-Dateien heruntergeladen (https://getbootstrap.com/docs/5.0/getting-started/download/ - hier Source Files wählen) und die Projektstruktur wie in https://getbootstrap.com/docs/5.0/customize/sass/ gezeigt angelegt sein.
+
+your-project/
+├── scss
+│   └── custom.scss
+└── bootstrap/
+    ├── js
+    └── scss
+
+Außerdem brauchen Sie einen Sass-Compiler.

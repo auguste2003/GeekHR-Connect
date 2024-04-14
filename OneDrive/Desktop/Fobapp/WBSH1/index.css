@@ -1,0 +1,157 @@
+/* * fait alusion a tous les elements de la classe */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+a{
+    /* on ne veut pas de textes soulinge */
+    text-decoration: none;
+}
+li{
+    list-style: none;
+    /* pas de pointilles dans les listes */
+}
+/* styliser les elements de l'entete */
+.header{
+    /* class header  on peut bouger la position de ses elements sans toutefois modifier celle des autres elements */
+    position: relative;
+}
+.header-top{
+    background: #2d2f4b;
+    display: flex;
+    /* elements articles  sur la meme ligne et les centrer ave justify*/
+    justify-content: center;
+    color:#fff;
+   
+    height: 50px;
+    /* creer de l'espace entre les differents elements */
+
+}
+.header-top-article{
+/* les icones et les textes sont aussi alignes et en colone*/
+display:flex;
+/* flex-direction: column; et avec justify les elements sont centres au milieu*/
+ justify-content: center; 
+ /* les elements peuvent etre bouges a la fois */
+align-items: center;
+
+}
+.header-top-icone{
+    color: #f76f01;
+    padding: 10px;
+    border-right: 1px solid #fff;
+}
+.header-top-text{
+    margin: 10px;
+}
+.header-top-text span{
+    color:#f76f01;
+    font-size: 0.7em;
+    font-weight:600 ;
+    font-family: 'popping', sans-serif;
+}
+.nav{
+    height: 135vh;
+    width: 100%;
+    background: linear-gradient(rgba(11, 32, 3, 0.602),rgba(32,3,3,0.52)), 
+    url(car.jpg) center/cover; 
+   /* l'image couvre la totalite de notre expace */ 
+
+}
+.menu{
+    /* Menu . Les differents elements sont alignes  */
+    display: flex;
+    justify-content: space-around ;
+    border-bottom: 1px solid #fff;
+padding-bottom: 10px;
+}
+.logo{
+    /* modifier notre logo */
+    margin-top: 10px;
+   
+}
+.logo a{
+    font-size: 1.3em;
+    color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+
+}
+.logo a span{
+/* coleur des elements du lien */
+    color: #f76f01;
+    font-weight: bold;
+}
+.nav_items{
+    /* alignes les differents liens  */
+    display: flex;
+}
+.link{
+    /* liens  */
+    margin-left: 15px;
+    color:#fff;
+    margin-top: 10px;
+    text-transform: uppercase;
+    background: #f76f01;
+    padding: 10px;
+    border-radius: 10px;
+}
+.link:hover{
+    /* faire flotter les differents liens lors de leurs  */
+background:linear-gradient(to left bottom ,rgba(241,82,8,0.918),rgba(216,71,14,0.753)) ;
+}
+.link a{
+    color: #fff;
+}
+.menu-icones{
+    /* lees diffentes icones */
+    display: flex ;
+    margin-top: 10px;
+    
+    font-size: 1.4rem;
+}
+.icone-compte a{
+    /* modifier la couleur des icones  */
+    color:#fff;
+    padding: 5px;
+}
+.icone-panier a{
+    color:#fff;
+}
+.header-contenu{
+    /* la partie texte de la parge */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%) ;
+    text-align: center;
+    /* centrer les textes */
+}
+.header-contenu h3{
+    /* contenu h3 modifizieren */
+    font-size: 1.8rem;
+    color:#fff;
+    font-weight:bold ;
+    animation-name:moveInToLeft ;
+animation-duration: 2s;
+animation-timing-function: ease-in-out;
+margin-bottom: 10px;
+   
+}
+ 
+@keyframes moveInToLeft{
+    0% {
+        opacity: 0;
+        transform:translate(-100px);
+    }
+    80% {
+        
+        transform:translate(20px);
+    }
+    100% {
+        opacity: 1;
+        transform:translate(0);
+    }
+}

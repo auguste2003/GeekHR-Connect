@@ -1,0 +1,31 @@
+/* Styles pour centrer le formulaire sur la page */
+.center-form {
+    display: flex;
+    justify-content: center;
+  
+    align-items: center;
+    min-height: 100vh; /* Utilisez la hauteur de la fenêtre pour centrer verticalement */
+  }
+  
+  /* Styles pour le formulaire lui-même */
+  .auth-form {
+    background-color: aliceblue;
+    width: 100%;
+    max-width: 400px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre douce au formulaire */
+    border-radius: 8px; /* Bordures arrondies pour le formulaire */
+  }
+  
+  /* Styles pour les champs de saisie et le bouton si nécessaire */
+  .p-inputtext {
+    width: 100%; /* Assurez-vous que les champs de saisie prennent toute la largeur */
+    margin-bottom: 1rem; /* Ajoute un peu d'espace sous chaque champ */
+  }
+  
+  .p-button {
+    width: 100%; /* Le bouton prend toute la largeur */
+    margin-top: 0.5rem; /* Ajoute un peu d'espace au-dessus du bouton */
+    background-color:  #d9b15a;
+  }
+  

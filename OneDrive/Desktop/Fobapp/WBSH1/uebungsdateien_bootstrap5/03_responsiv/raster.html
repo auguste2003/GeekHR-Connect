@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .row * {
+            background-color: rgba(39, 41, 43, 0.03);
+            border: 1px solid rgba(39, 41, 43, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">A</div> 
+            <!-- Platz zwischen den Elementen aufgeteilt  -->
+            <div class="col">B</div>
+            <div class="col">C</div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <!-- zwolfspaltiger Raster . Jeder nimmt abhängig von dem  Index viel Platz  -->
+            <div class="col-3">A</div>
+            <div class="col-6">B</div>
+            <div class="col-3">C</div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col">A</div>
+            <div class="col">B</div>
+            <div class="col">A</div>
+            <div class="col">B</div>
+            <div class="col-5">C</div>
+        </div>
+        <hr>
+        <div class="row">
+            <!-- Das passt einfach die Breite mit dem Inhalt an  -->
+            <div class="col-auto">AAAAAA AAA</div>
+            <div class="col-auto">B</div>
+            <div class="col">C</div>
+        </div>
+        <hr>
+        <div class="row row-cols-4">
+            <!-- Auf vielen Spalten verteilen -->
+            <div class="col">A</div>
+            <div class="col">B</div>
+            <div class="col">A</div>
+            <div class="col">B</div>
+            <div class="col">C</div>
+        </div>
+
+        <hr>
+    </div>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

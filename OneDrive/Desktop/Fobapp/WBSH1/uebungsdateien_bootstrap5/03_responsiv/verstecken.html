@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <h2>ab Größe sm (576px) sichtbar</h2>
+        <p class="d-none d-sm-block bg-info">.d-none .d-sm-block</p>
+        <h2>nur bei Größe sm (576px) versteckt</h2>
+        <p class="d-sm-none d-md-block bg-info">.d-sm-none .d-md-block</p>
+        <h2>ab Größe sm (576px) versteckt</h2>
+        <p class="d-block d-sm-none bg-info">.d-block .d-sm-none</p>
+    </div>
+
+    <div>
+        <h2 class="visually-hidden">Titel für Screenreader</h2>
+        <a class="visually-hidden-focusable" href="#content">zum Inhalt springen</a>
+    </div>
+
+
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

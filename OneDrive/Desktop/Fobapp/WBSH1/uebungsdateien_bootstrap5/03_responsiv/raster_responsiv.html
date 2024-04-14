@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .row * {
+            background-color: rgba(151, 238, 202, 0.692);
+            border: 1px solid rgba(65, 120, 175, 0.548);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- small  -->
+            <div class="col-sm">A</div> 
+            <div class="col-sm">B</div>
+            <div class="col-sm">C</div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <!-- Die Elemente unter eoinander anordnen  -->
+            <div class="col-sm-4 col-md-3">A</div>
+            <div class="col-sm-4 col-md-6">B</div>
+            <div class="col-sm-4 col-md-3">C</div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-8">A</div>
+            <div class="col-6 col-md-4">B</div>
+        </div>
+        <hr>
+
+        <div class="bg-dark text-white col-md-6 m-auto p-4 rounded">
+            <h1 class="display-3">Überschrift</h1>
+        </div>
+
+        <hr>
+    </div>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

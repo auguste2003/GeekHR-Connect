@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <form>
+            <div class="col-md-3 my-2">
+                <label for="mail" class="form-label">E-Mail</label>
+                <input type="email" class="form-control" id="mail">
+            </div>
+            <div class="col-md-3 my-2">
+                <label for="passwort" class="form-label">Passwort</label>
+                <input type="password" class="form-control" id="passwort">
+            </div>
+            <div class="col-md-3 my-2">
+                <label for="option" class="form-label">Welche Option?</label>
+                <select class="form-select" id="option">
+                    <option selected>Option wählen</option>
+                    <option value="1">Eins</option>
+                    <option value="2">Zwei</option>
+                    <option value="3">Drei</option>
+                </select>
+            </div>
+            <div class="col-md-3 my-2 form-check">
+                <input type="checkbox" class="form-check-input" id="agb">
+                <label class="form-check-label" for="agb">AGB akzeptiert</label>
+            </div>
+            <div class="form-check my-2">
+                <input type="radio" class="form-check-input" name="farbe" id="blau">
+                <label class="form-check-label" for="blau">blau</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="farbe" id="rot" checked>
+                <label class="form-check-label" for="rot">rot</label>
+            </div>
+            <button type="submit" class="btn btn-primary my-2">Absenden</button>
+        </form>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+#carouselBeispiel {
+    height: 500px;
+ }
+ 
+ .carousel-inner {
+    height: 500px;
+ }
+ 
+ .carousel-inner img {
+    height: 100%;
+    object-fit: cover;
+ }
+
+  /* Verbesserung der Lesbarkeit der Carousel-Captions */
+  .carousel-caption {
+    /* background: rgba(0, 0, 0, 0.5); Semi-transparenter Hintergrund */
+    color: white; /* Weiße Textfarbe */
+    /* text-shadow: 1px 1px 2px black; Textschatten für besseren Kontrast */
+    /* border-radius: 5px; Abgerundete Ecken */
+    padding: 500px; /* Innenabstand */
+    /* text-align: center; */
+    display: none;
+ }
+ 
+ .carousel-caption h5 {
+    font-size: 2rem; /* Größere Schrift für die Überschrift */
+   
+ }
+ 
+ .carousel-caption p {
+    font-size: 1.25rem; /* Größere Schrift für den Absatz */
+   
+ }
+ 
+ 
+ 
+   /* Füge benutzerdefinierten CSS für die Navbar hinzu */
+   body {
+    padding-top: 56px; /* Höhe der Navbar, damit der Inhalt nicht von der Navbar verdeckt wird */
+ }
+ 
+ .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Z-Index, um sicherzustellen, dass die Navbar über anderen Elementen liegt */
+ }
+ 
+ /* Füge benutzerdefinierten CSS für den Hauptinhalt hinzu */
+ .main-content {
+    padding: 40px; /* Platz oberhalb des Inhalts, um sicherzustellen, dass er nicht von der Navbar verdeckt wird */
+ }
+ @media (min-width: 768px) {
+    #carouselBeispiel {
+        height: 500px;
+     }
+     
+     .carousel-inner {
+        height: 500px;
+     }
+     
+     .carousel-inner img {
+        height: 100%;
+        object-fit: cover;
+     }
+    
+      /* Verbesserung der Lesbarkeit der Carousel-Captions */
+      .carousel-caption {
+        /* background: rgba(0, 0, 0, 0.5); Semi-transparenter Hintergrund */
+        color: white; /* Weiße Textfarbe */
+        /* text-shadow: 1px 1px 2px black; Textschatten für besseren Kontrast */
+        /* border-radius: 5px; Abgerundete Ecken */
+        padding: 500px; /* Innenabstand */
+        /* text-align: center; */
+        display: none;
+     }
+     
+     .carousel-caption h5 {
+        font-size: 2rem; /* Größere Schrift für die Überschrift */
+       
+     }
+     
+     .carousel-caption p {
+        font-size: 1.25rem; /* Größere Schrift für den Absatz */
+       
+     }
+     
+     
+     
+       /* Füge benutzerdefinierten CSS für die Navbar hinzu */
+       body {
+        padding-top: 56px; /* Höhe der Navbar, damit der Inhalt nicht von der Navbar verdeckt wird */
+     }
+     
+     .navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000; /* Z-Index, um sicherzustellen, dass die Navbar über anderen Elementen liegt */
+     }
+     
+     /* Füge benutzerdefinierten CSS für den Hauptinhalt hinzu */
+     .main-content {
+        padding: 40px; /* Platz oberhalb des Inhalts, um sicherzustellen, dass er nicht von der Navbar verdeckt wird */
+     }
+  }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Wen der User sends a request , he get a response from server  -->
+    <button onclick =showCountries()>show Countries </button>
+<div id="feed"></div>
+    <script>
+ function showCountries() {
+      // ein neues XMLHttpRequesr erstellen
+      let xhr = new XMLHttpRequest();
+
+      // die Anfrage initialisieren
+      xhr.open('GET', 'https://restcountries.com/v3.1/all', true);
+
+      // http-Status prüfen
+      xhr.onload = function () {
+        if (xhr.status == 200) {
+          console.log('success');
+          let states = JSON.parse(this.response);
+          console.log(states);
+// forEach Schleife 
+          states.forEach(country => {
+            const countryCard = document.createElement('div');
+            const countryCardImage = document.createElement('img');
+
+            // Hier die Änderung: von Country.name zu country.name
+            countryCard.innerHTML = country.name.common;
+
+            // Hier die Änderung: von country.flag zu country.flags.svg
+            countryCardImage.src = country.flags.svg;
+
+            countryCard.appendChild(countryCardImage);
+            document.getElementById('feed').appendChild(countryCard);
+
+})
+        }
+    }
+// send the request 
+xhr.send()
+
+}
+
+    </script>
+</body>
+</html>

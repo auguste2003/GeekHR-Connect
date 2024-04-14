@@ -1,0 +1,58 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()"> 
+ 
+
+  <!-- Importer le réativeformmodule  -->
+
+ 
+  <!-- Message de validation  -->
+  <div class="center-form">
+      <div class="auth-form p-fluid">
+        <h2 class="text-center">Inscription</h2>
+        <div class="p-field">
+          <label for="email">Email</label>
+          <input id="email" type="email" pInputText formControlName="email" class="form-control">
+          <small *ngIf="f['email'].touched && f['email'].errors" class="text-danger">
+            <span *ngIf="f['email'].errors['required']">Email est requis.</span>
+            <span *ngIf="f['email'].errors['email']">Email invalide.</span>
+          </small>
+          
+        </div>
+        <div class="p-field">
+          <label for="phone">Numéro de Téléphone</label>
+          <input id="phone" type="tel" pInputText formControlName="phone" class="form-control">
+          <small *ngIf="f['phone'].touched && f['phone'].errors" class="text-danger">
+            Numéro de téléphone invalide . Exemple (01551337534).
+          </small>
+          
+        </div>
+        <div class="p-field">
+          <label for="username">Nom d'utilisaeur </label>
+          <input id="username" type="text" pInputText formControlName="username" class="form-control">
+          <small *ngIf="f['username'].touched && f['username'].errors" class="text-danger">
+            Nom d'utilisaeur  est requis.
+          </small>
+          
+        </div>
+        <div class="p-field">
+          <label for="password">Password</label>
+          <input id="password" type="password" pInputText formControlName="password" class="form-control">
+          <small *ngIf="f['password'].touched && f['password'].errors" class="text-danger">
+            <span *ngIf="f['password'].errors['required']">Mot de passe est requis.</span>
+            <span *ngIf="f['password'].errors['minlength']">Mot de passe doit contenir au moins 8 caractères.</span>
+          </small>
+          
+        </div>
+        <button pButton type="submit" label="S'inscrire" class="btn btn-primary btn-block"></button>
+      </div>
+    </div>
+    <!-- <p-dialog header="Inscription" [(visible)]="displayDialog" [modal]="true" [style]="{width: '350px'}">
+      <div class="dialog-content">
+          <p>Inscription réussie !</p>
+      </div>
+      <p-footer>
+          <button type="button" pButton label="OK" (click)="displayDialog=false"></button>
+      </p-footer>
+    </p-dialog> -->
+</form>
+
+

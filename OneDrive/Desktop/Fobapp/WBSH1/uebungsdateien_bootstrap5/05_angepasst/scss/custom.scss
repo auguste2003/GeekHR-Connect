@@ -1,0 +1,13 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+$body-bg: red;
+$body-color: white;
+$primary: purple;
+
+@import "../bootstrap/scss/bootstrap";
+
+// Then add additional custom code here . Das hat sie angepasst .
+// Man kann auch prepos auch benutzen , um die sass Datei zu erzeugen 
+// Man Kann seine css Variable alleine erzeugen 
