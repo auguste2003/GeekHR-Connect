@@ -14,8 +14,8 @@ import java.util.UUID;
 @Table(name = "employees")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // Crée automatiquement uclasse n constructeur pour chaque champ de la
+@NoArgsConstructor // Cree un constructeur sans argument
 // Ajouter une clé primaire
 public class Employee {
     // Pour sécurité
