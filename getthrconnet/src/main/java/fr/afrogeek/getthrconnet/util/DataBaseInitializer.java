@@ -44,7 +44,7 @@ public class DataBaseInitializer implements CommandLineRunner {
                 "Ndi", "Tcham", "Essomba", "Fouda", "Mbarga", "Biya", "Nguini", "Tataw", "Libii",
                 "Milla", "Toko", "Ekambi", "Kunde", "Onana", "Fai", "Banana", "Zobo", "Tabi", "Yaya",
                 "Ngalle", "Mouelle", "Kotto", "Lottin", "Ntamack", "Ngapeth", "Moundi", "Ndjana", "Tambe", "Achidi",
-                "Ngum", "Foe", "Wome", "Nlend", "Ngo", "Ekotto", "Abega", "Mbida", "Emana", "Onguene"
+                "Ngum", "Foe", "Wome", "Nlend","Ndongo", "Ngo", "Ekotto", "Abega", "Mbida", "Emana", "Onguene"
         };
         String[] cities = {"Yaoundé", "Douala", "Bamenda", "Garoua", "Maroua", "Nkongsamba", "Buea", "Ngaoundéré", "Kumba", "Limbe", "Addis Abeba", "Cairo", "Cape Town", "Lagos", "Nairobi"};
         String[] countries = {"Cameroun", "Nigeria", "Ghana", "Kenya", "Égypte", "Afrique du Sud", "Tanzanie", "Côte d'Ivoire", "Sénégal", "Ethiopie", "Maroc", "Algérie", "Uganda", "Mali", "Zimbabwe"};
