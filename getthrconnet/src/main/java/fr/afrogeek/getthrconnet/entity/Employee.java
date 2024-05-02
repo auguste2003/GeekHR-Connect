@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -39,7 +40,7 @@ public class Employee {
     private String gender ;
 
     @Column(nullable = false)
-    private LocalDate dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     @Column(nullable = false)
     private String city ;
