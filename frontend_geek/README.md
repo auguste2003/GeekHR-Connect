@@ -73,5 +73,27 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 - BihaviorObject / Devinir la variable dans les services et l'utiliser partout .
  
+# partie 5 : Les composants 
+
+- tous les composant de bases vont du composant de base , AppComponent . 
+
+- Dans le AppModule avec bootstrap , on fixe AppComponent comme point de départ .
+
+- cycle de vie 
+- ngOnInit() : Chaque foie que le composant est créé , on fait une action .
+- ngOnChanges(changes : SimpleChanges ):void{}  : changer la valeur qui a changé avec input()
+- ngOnDestroy() : 
+- ngAfterViewInit() : 
+- ngDoCheck() : 
+
+- input() : Envoyer des données de parent á enfant 
+- Dans enfant , on definit qu'un élement est que recoit des valeurs de l'exterieur 
+- on l'appelle l'enfant et lui donne la valeur en comme un id par exemple 
+
+# partie 6 : Les pipe 
+
+-le pipe retourne des valleurs changées . Changer la forme des données dans 
+{{employee | date : 'dd MMMM yyyy' }}
+{{age|maitres l'age á partir de l'age de naissance }}
 
 
