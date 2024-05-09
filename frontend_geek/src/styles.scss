@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.css";
+
+$color-primary: #005AC8;
+$color-text-on-primary: #fff;
+$color-shadow: #00000029;
+$color-background-hover: #fff;
+$color-text-hover: #005AC8;
+
+.text-color-primary{
+  color: $color-primary;
+}
+
+.p-button{
+  background-color: $color-primary;
+  border-color: $color-primary;
+  color: $color-text-on-primary;
+  box-shadow: 2px 3px 6px $color-shadow;
+  font-weight: 600;
+  text-align: center;
+
+  &:hover{
+    background-color: $color-background-hover;
+    color: $color-text-hover;
+  }
+}
+
+.p-menuitem:hover .p-menuitem-icon,
+.p-menuitem:hover .p-menuitem-text
+{
+  color: $color-primary;
+}
+
+a{
+  color: $color-primary;
+}

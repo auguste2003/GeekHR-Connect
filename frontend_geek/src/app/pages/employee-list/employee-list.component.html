@@ -1,0 +1,29 @@
+<div class="grid">
+    <div class="col-12">
+      <h2 class="text-color-primary">Liste des collaborateurs</h2>
+      <p>Voici la liste de vos collaborateurs</p>
+      <p-button  label="Add Employee" [rounded]="true" ></p-button>
+    </div>
+    <div class="col-12">
+      <div class="flex justify-content-end">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText />
+        </span>
+        <p-button class="ml-2" icon="pi pi-sliders-h"></p-button>
+      </div>
+    </div>
+    <div class="col-12">
+      <p-divider></p-divider>
+    </div>
+    <div class="col-11">
+      <p>contenue</p>
+    </div>
+    <div *ngFor="let emoloyee of employees" class="col-12 xl:col-4 md:col-6 ">
+
+      <p>FirstName: {{emoloyee.firstName}}</p>
+      <p>LastName: {{emoloyee.lastName}}</p>
+      <p>Gender: {{emoloyee.firstName}}</p>
+      <p>Position: {{emoloyee.gender}}</p>
+    </div>
+  </div>

@@ -25,3 +25,75 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# partie 1 : Prime flex :  
+
+- On utilise le systeme de gride de prime flex 
+- prime ng 
+-shakai 
+
+# partie 2 : Definition et présentation globale des employes pour la présentations .
+- creer 03 pakahes : enums(employee) , position(Position), Type(UUID)
+
+# partie 3 Les services 
+ 
+- Le service nous permet d'utiliser notre backend .(provider hoot)
+- le provider peut etre mis dans un service avec 
+- httpcall 
+
+- creer un package service 
+
+- provide in root injecte dans le app.module.ts directement 
+
+- constructeur injecte les dependances . 
+
+- utilisation des modules http
+
+- Définir l'url de l'api est le dirigé vers le backend 
+
+- utiliser les observables (rxjx (données asynchrones ))
+
+- Observable (recevoir des fichier ou des données en direct | on ne connait pas le temps que le backend prend|la lenteur )
+
+- Promesse () retourne une seule valeur 
+
+# partie 4 appelle des collaborateurs 
+- Utiliser notre composant 
+
+- appeller le backend 
+
+- subscription (avec un pipe pour les pertes de mémores(la valleur récupßerer , on detuit l'observable) ) : next nous permet de récupérer des employées . 
+
+- oninit(pour dire que chaque fois que l'initialisation  )
+
+- aller au backend et utiliser le 
+
+- config /WebConfig implements WebMvxConfigurer /override addCordMapping 
+
+- BihaviorObject / Devinir la variable dans les services et l'utiliser partout .
+ 
+# partie 5 : Les composants 
+
+- tous les composant de bases vont du composant de base , AppComponent . 
+
+- Dans le AppModule avec bootstrap , on fixe AppComponent comme point de départ .
+
+- cycle de vie 
+- ngOnInit() : Chaque foie que le composant est créé , on fait une action .
+- ngOnChanges(changes : SimpleChanges ):void{}  : changer la valeur qui a changé avec input()
+- ngOnDestroy() : 
+- ngAfterViewInit() : 
+- ngDoCheck() : 
+
+- input() : Envoyer des données de parent á enfant 
+- Dans enfant , on definit qu'un élement est que recoit des valeurs de l'exterieur 
+- on l'appelle l'enfant et lui donne la valeur en comme un id par exemple 
+
+# partie 6 : Les pipe 
+
+-le pipe retourne des valleurs changées . Changer la forme des données dans 
+{{employee | date : 'dd MMMM yyyy' }}
+{{age|maitres l'age á partir de l'age de naissance }}
+
+
