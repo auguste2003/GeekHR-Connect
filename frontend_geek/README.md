@@ -27,6 +27,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 
+# Backend :
+- Modelisation 
+- Creation du projet 
+- ![Overview](image.png)
+- Tester sur swagger en utilisant l'API  
+
 # partie 1 : Prime flex :  
 
 - On utilise le systeme de gride de prime flex 
@@ -96,4 +102,36 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 {{employee | date : 'dd MMMM yyyy' }}
 {{age|maitres l'age á partir de l'age de naissance }}
 
+# partie 7 : Injektion de dépendances 
 
+- basée sur le constructeur 
+
+- injection basée sur l'injecteur 
+
+# partie 8 : Utilisation des pipes pour le formatage et l'affichage dynamique dans Angular .
+
+- Formater des chaines de caracteres et autres 
+- ng g pipe pipe-name pour generer une pipe 
+
+# patie 9 : Creation de CollaborateurItem et gestion des données avec @Input 
+
+- @Input sur employeeItem nous permet de preparer le composant á recevoir un employée 
+- Changer des information et rendre le composant réutilisable 
+
+# patie 10 .: Emploi de directives 
+
+- les directives structurelles : Ajout ou sprimme les élements du DOM et nous permet de garder nos données structurées . 
+- Directives d'attributs : ngClass ngModel ngStyle
+
+# parties 11 ajouter des filtres 
+- Ajouter notre boutton 
+
+
+# partie ajouter des formulaire . 
+On utilise des formodule de primeNG et inporte juste le modal de primeNG 
+
+Avec les calender , input text et tous autres . 
+
+# partie : trackbyId :
+- Chaque changement ne pousse pas á la creation de nouveaux élements dans le dom 
+- Il faut toujour déabonner apres les subscreabes en utilisant un ngOnDestroy() 
