@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
@@ -29,11 +28,15 @@ $color-text-hover: #005AC8;
 }
 
 .p-menuitem:hover .p-menuitem-icon,
-.p-menuitem:hover .p-menuitem-text
-{
+.p-menuitem:hover .p-menuitem-text{
   color: $color-primary;
 }
 
 a{
   color: $color-primary;
+}
+
+.required-asterisk:after {
+  content: " *";
+  color: $color-primary;;
 }

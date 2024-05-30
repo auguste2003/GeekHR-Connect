@@ -29,4 +29,8 @@ export class EmployeeService {
       imageURL: `https://randomuser.me/api/portraits/${employee.gender}/${index}.jpg`
     }
   }
+
+  public createEmployee(employee: Employee): Observable<Employee>{
+    return this.http.post<Employee>(`${this.apiUrl}`, employee);
+  }  // Créer des employées 
 }

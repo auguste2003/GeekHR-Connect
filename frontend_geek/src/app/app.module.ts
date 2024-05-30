@@ -20,6 +20,11 @@ import { MenuModule } from 'primeng/menu';
 import { EmployeeItemComponent } from './pages/employee-list/employee-item/employee-item.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MessageService} from "primeng/api";
+import { ErrorMessagesComponent } from './shared/error-messages/error-messages.component';
+import {DropdownModule} from "primeng/dropdown";
+import {InputSwitchModule} from "primeng/inputswitch";
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,8 @@ import {MessageService} from "primeng/api";
     FooterComponent,
     EmployeeListComponent,
     AgePipePipe,
-    EmployeeItemComponent
+    EmployeeItemComponent,
+    ErrorMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,10 @@ import {MessageService} from "primeng/api";
     HttpClientModule,
     MenuModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    DialogModule,
+    DropdownModule,
+    InputSwitchModule
   ],
   providers: [
     provideHttpClient(withFetch()),
