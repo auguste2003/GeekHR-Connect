@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Employee} from "../models/employee";
+import { UUID } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,12 @@ export class EmployeeService {
       imageURL: `https://randomuser.me/api/portraits/${employee.gender}/${index}.jpg`
     }
   }
+
+  // On doit faire le update d'un employé 
+  public updateEmployee(id: UUID, employee: Employee): Observable<Employee>{
+    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
+  }
+
 
   public createEmployee(employee: Employee): Observable<Employee>{
     return this.http.post<Employee>(`${this.apiUrl}`, employee);

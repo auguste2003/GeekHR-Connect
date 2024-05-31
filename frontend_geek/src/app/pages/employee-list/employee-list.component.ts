@@ -8,7 +8,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UUID} from "../../types/uuid";
 import { EmployeeSearch } from '../../types/employee-search';
 import { maxAgeDateValidator, minAgeDateValidator, trimValidator } from '../../utils/custom-validator';
-import { getLocalISOTimeString } from '../../utils/utils';
+import {  formatDate, getLocalISOTimeString } from '../../utils/utils';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -66,6 +67,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
     }
   ];
 
+   // Options pour le formulaire
   public genderOptions = [
     { label: 'Men', value: 'men' },
     { label: 'Women', value: 'women' }
@@ -84,6 +86,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   public employeeForm!: FormGroup;
   public isSubmitButtonOn: boolean = false;
 
+  // Propriétés pour le dialogue
   public dialogTitle: string = "Creating an employee";
   public isEmployeeDialogOn: boolean = false;
 
@@ -94,34 +97,60 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
 
   constructor(private employeeService: EmployeeService,
               private messageService: MessageService) {}
-
-              ngOnInit(): void {
-                this.initializeForm();
-                this.getAllEmployee();
-                this.setupFilteredEmployees();
-              }
+ /**
+   * Méthode ngOnInit
+   * Appelée lors de l'initialisation du composant
+   * Initialise le formulaire, récupère tous les employés et configure le filtrage
+   */
+ ngOnInit(): void {
+  this.initializeForm();
+  this.getAllEmployee();
+  this.setupFilteredEmployees();
+}          
             
-
+ /**
+   * Méthode ngOnDestroy
+   * Appelée lorsque le composant est détruit
+   * Désinscrit les abonnements pour éviter les fuites de mémoire
+   */
   ngOnDestroy(): void { // Arréter la soubscription lorsque le composant est détruit .
     this.subscription.unsubscribe();
   }
 
+
+  /**
+   * Affiche le dialogue pour ajouter un employé
+   */
   public showDialogForAddEmployee(){  // Montrer le dialogue pour l'ajout des employés 
     this.isEmployeeDialogOn = true;
   }
 
-  public onSubmit(){ // Submission des donnees du formulaire 
+
+  /**
+   * Soumet le formulaire pour ajouter un nouvel employé
+   * Vérifie la validité du formulaire et appelle la méthode pour créer l'employé
+   */
+  public onSubmit(){
     if(!this.employeeForm.valid){
-      this.employeeForm.markAsTouched(); // Avec un unique formulaire qui peut etre marqué comme toucher 
+      this.employeeForm.markAsTouched();
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Form is invalid' });
     }else{
       this.isSubmitButtonOn = true;
-      this.createEmployee();
+      if(this.employeeForm.value.id){
+        this.updateEmployee();
+      }else{
+        this.createEmployee();
+      }
     }
   }
 
+
+  /**
+   * Initialise le formulaire avec des validateurs personnalisés
+   */
   private initializeForm(): void{  // initialiser le formulaire en utilisant   validations 
     this.employeeForm = new FormGroup({
+      id: new FormControl(null),
       gender: new FormControl(null, [Validators.required, trimValidator]),
       firstName: new FormControl('', [Validators.required, trimValidator]), // Ces validateurs sont des validateurs spécifiques pours créer des composants 
       lastName: new FormControl('', [Validators.required, trimValidator]),
@@ -136,6 +165,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
     });
   }
 
+  /**
+   * Crée un nouvel employé en utilisant le service EmployeeService
+   * Met à jour la liste des employés et affiche un message de succès ou d'erreur
+   */
   private createEmployee(): void{
     this.employeeService.createEmployee(
       {...this.employeeForm.value, dateOfBirth: getLocalISOTimeString(this.employeeForm.value.dateOfBirth)} // Copie inegralle des données et changer uniquement la date 
@@ -156,10 +189,44 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
     })
   }
 
+// La methode initialise les employés 
+  private updateEmployee(): void{
+    this.employeeService.updateEmployee(
+      this.employeeForm.value.id,
+      {...this.employeeForm.value, dateOfBirth: getLocalISOTimeString(this.employeeForm.value.dateOfBirth)}
+    ).pipe(take(1)).subscribe({
+      next: (result: Employee): void =>{
+        this.employees = this.employees.map((employee: Employee, index: number): Employee =>{
+          if(employee.id===result.id){ // Au cas oú on trouve l'employé 
+            result.imageURL = `https://afrogeek.fr/assets/img/hrconnect/${result.gender}/${index}.jpg`;
+            return result;
+          }else{
+            return employee;
+          }
+        });
+        this.filteredEmployees$ = of(this.employees);
+        this.isSubmitButtonOn = false;
+        this.isEmployeeDialogOn = false;
+        this.messageService.add({severity: 'success', summary: 'Update Employee '+result.firstName+' successfully', detail: 'Update Employee successfully'})
+      },
+      error: (): void=>{
+        this.isSubmitButtonOn = false;
+        this.messageService.add({severity: 'error', summary: 'Update Employee error', detail: 'Update Employee error'});
+      }
+    })
+  }
+ 
+    /**
+   * Méthode utilisée pour suivre les employés par leur identifiant unique
+   */
   public trackById(index: number, item: Employee): UUID | undefined {
     return item.id;
   }
 
+   /**
+   * Récupère tous les employés en utilisant le service EmployeeService
+   * Met à jour la liste des employés et filtre les employés
+   */
   private getAllEmployee(): void{
     this.employeeService.getAllEmployee().pipe(take(1)).subscribe({
       next: (data: Employee[]): void => {
@@ -172,6 +239,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
     })
   }
 
+   /**
+   * Configure le filtrage des employés en fonction des changements de valeur du champ de recherche
+   */
   private setupFilteredEmployees(): void {
     this.subscription.add(
       this.searchControl.valueChanges
@@ -182,7 +252,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
         })
     );
   }
-
+/**
+   * Filtre les employés en fonction du texte de recherche actuel et du critère de recherche sélectionné
+   */
   private filterEmployees(): void { // Filtrer les différents employés 
     const filtered: Employee[] = this.employees?.filter((employee: Employee): boolean => { // Filtrer les différents employées 
       if(this.employeeSearch==='SearchByName'){ // Filtre en fonction du nom 
@@ -202,6 +274,22 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   }
 
 
+
+public openAddDialog(){
+    this.employeeForm.reset();
+    this.isEmployeeDialogOn = true;
+  }
+
+
+  // Ouverture du dialogue pour le update de l'employé 
+  public openEditDialog(employee: Employee): void {
+    this.dialogTitle = "Updating employee "+employee.firstName;
+    this.isEmployeeDialogOn = true;
+    this.employeeForm.patchValue({
+      ...employee,
+      dateOfBirth: formatDate(employee.dateOfBirth),
+    });
+  }
 
 
 

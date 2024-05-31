@@ -16,7 +16,10 @@
           pTooltip="Edit"
           tooltipPosition="top"
           class="pi pi-fw pi-pencil cursor-pointer mr-2 text-color-primary"
+          (click)="edit(employee)"  
+          
         ></i>
+        <!-- edit() encoit les données au composant parent qui est employe-list  -->
         <i
           pTooltip="Delete"
           tooltipPosition="top"

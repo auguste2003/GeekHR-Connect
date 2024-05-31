@@ -42,7 +42,7 @@ export class ValidatorService { // un service de validation des erreurs pour les
       return `You must be at least ${errors['minAgeDate'].requiredAge} years old. Current age: ${errors['minAgeDate'].actualAge}.`;
     }
     if (errors['maxAgeDate']) {
-      return `You must be at least ${errors['maxAgeDate'].requiredAge} years old. Current age: ${errors['maxAgeDate'].actualAge}.`;
+      return `You must be at least ${errors['maxAgeDate'].requiredAge} years old. Current age: ${errors['maxAgeDate'].actualAge}.`; // Comment j'obtient l'age actuel ? 
     }
 
     return 'Invalid input.';

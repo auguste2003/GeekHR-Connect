@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+ // Le ffoter de l'application 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',

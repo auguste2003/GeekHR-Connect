@@ -5,6 +5,8 @@ import {MenuItem} from "primeng/api";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
+
+// Ceci presente le header de l'application 
 export class HeaderComponent {
   public items: MenuItem[] = [
     {
