@@ -1,29 +1,49 @@
 <div class="grid">
-    <div class="col-12">
-      <h2 class="text-color-primary">Liste des collaborateurs</h2>
-      <p>Voici la liste de vos collaborateurs</p>
-      <p-button  label="Add Employee" [rounded]="true" ></p-button>
-    </div>
-    <div class="col-12">
-      <div class="flex justify-content-end">
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input type="text" pInputText />
-        </span>
-        <p-button class="ml-2" icon="pi pi-sliders-h"></p-button>
-      </div>
-    </div>
-    <div class="col-12">
-      <p-divider></p-divider>
-    </div>
-    <div class="col-11">
-      <p>contenue</p>
-    </div>
-    <div *ngFor="let emoloyee of employees" class="col-12 xl:col-4 md:col-6 ">
+  <div class="col-12">
+    <h2 class="text-color-primary">Liste des collaborateurs</h2>
+    <p>Voici la liste de vos collaborateurs</p>
+    <p-button  severity="secondary" label="Add Employee" [rounded]="true" ></p-button>
+  </div>
+  <div class="col-12">
+    <div class="flex justify-content-end">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <!-- Adapte le placholder  -->
+        <input type="text" [formControl]="searchControl" placeholder="{{employeeSearchTextPlaceholder}}" pInputText />
+      </span>
+      <p-button severity="secondary" (onClick)="menu.toggle($event)" class="ml-2" icon="pi pi-sliders-h"></p-button>
+      <!-- popup cahe les élements du menu  -->
+      <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
 
-      <p>FirstName: {{emoloyee.firstName}}</p>
-      <p>LastName: {{emoloyee.lastName}}</p>
-      <p>Gender: {{emoloyee.firstName}}</p>
-      <p>Position: {{emoloyee.gender}}</p>
     </div>
   </div>
+  <div class="col-12">
+    <p-divider></p-divider>
+  </div>
+  <!-- Lorsque le composant se composant se ferme les employées filtrés sont fermés   -->
+  <ng-container *ngIf="(filteredEmployees$ | async) as employees; else loading">
+    <ng-container *ngIf="employees.length>0; else noEmployees">
+      <div *ngFor="let employee of employees; trackBy: trackById" class="col-12 xl:col-4 md:col-6">
+        <app-employee-item [employee]="employee"></app-employee-item>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <!--Templates Start-->
+  <ng-template #noEmployees>
+    <div class="card col-12 text-center">
+      <div class="text-3xl font-bold text-xl mb-3 title">
+        {{ noEmployeeFound }}
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #loading>
+    <div class="card col-12 text-center">
+      <div class="text-3xl font-bold text-xl mb-3 title">
+        {{ loadingMessage }}
+      </div>
+    </div>
+  </ng-template>
+  <!--Templates End-->
+
+</div>
