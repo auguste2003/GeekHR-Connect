@@ -9,6 +9,7 @@ import {UUID} from "../../types/uuid";
 import { EmployeeSearch } from '../../types/employee-search';
 import { maxAgeDateValidator, minAgeDateValidator, trimValidator } from '../../utils/custom-validator';
 import {  formatDate, getLocalISOTimeString } from '../../utils/utils';
+import { ValidatorService } from '../../services/validator.service';
 
 
 @Component({
@@ -97,6 +98,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
 
   constructor(private employeeService: EmployeeService,
               private messageService: MessageService,
+              private validatorService: ValidatorService,
               private confirmationService: ConfirmationService) {}
  /**
    * Méthode ngOnInit
@@ -134,7 +136,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   public onSubmit(){
     if(!this.employeeForm.valid){
       this.employeeForm.markAllAsTouched();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Form is invalid' });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: this.validatorService.getFormValidationErrors(this.employeeForm) });
     }else{
       this.isSubmitButtonOn = true;
       if(this.employeeForm.value.id){
