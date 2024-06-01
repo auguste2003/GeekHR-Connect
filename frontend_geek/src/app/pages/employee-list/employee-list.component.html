@@ -23,6 +23,7 @@
         <app-employee-item
           [employee]="employee"
           (onEdit)="openEditDialog($event)"
+          (onDelete)="deleteEmployee($event)"
         ></app-employee-item>
       </div>
     </ng-container>

@@ -2,7 +2,7 @@ import {Component, computed, inject, OnDestroy, OnInit, Signal, signal, Writable
 import {EmployeeService} from "../../services/employee.service";
 import {Observable, of, startWith, Subscription, take} from "rxjs";
 import {Employee} from "../../models/employee";
-import {MenuItem, MessageService} from "primeng/api";
+import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {UUID} from "../../types/uuid";
@@ -96,7 +96,8 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   private subscription: Subscription = new Subscription();
 
   constructor(private employeeService: EmployeeService,
-              private messageService: MessageService) {}
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService) {}
  /**
    * Méthode ngOnInit
    * Appelée lors de l'initialisation du composant
@@ -132,7 +133,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
    */
   public onSubmit(){
     if(!this.employeeForm.valid){
-      this.employeeForm.markAsTouched();
+      this.employeeForm.markAllAsTouched();
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Form is invalid' });
     }else{
       this.isSubmitButtonOn = true;
@@ -214,6 +215,29 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
         this.messageService.add({severity: 'error', summary: 'Update Employee error', detail: 'Update Employee error'});
       }
     })
+  }
+
+  // Boutton de supression d'un employé 
+  public deleteEmployee(employee: Employee){
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete the Employee '+employee.firstName +' ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon:"none",
+      rejectIcon:"none",
+      rejectButtonStyleClass:"p-button-text",
+      accept: (): void => { // si l'uilisateur acepter qu'il veut suprimer 
+        this.employeeService.deleteEmployee(employee.id as UUID).pipe(take(1)).subscribe({ // On renvoit le id au beackend pour la supression 
+          next: (): void =>{ // Spécifer l'intension 
+            this.messageService.add({severity: 'success', summary: 'Delete Employee '+employee.firstName+' successfully', detail: 'Delete Employee successfully'});
+            this.employees = this.employees.filter((val: Employee): boolean => val.id !== employee.id); // Filtrer les valeur et retirer l'employé actuel
+            this.filteredEmployees$ = of(this.employees); // recevoir les employés actuels , ,, Of réactualise la liste 
+                    },
+          error: (): void => { // renvoyer une erreur en cas d'érreur 
+            this.messageService.add({severity: 'error', summary: 'Delete Employee '+employee.firstName+' error', detail: 'Delete Employee error'})
+          }});
+      }
+    });
   }
  
     /**

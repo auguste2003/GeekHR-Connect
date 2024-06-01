@@ -19,12 +19,12 @@ import { AgePipePipe } from './age-pipe.pipe';
 import { MenuModule } from 'primeng/menu';
 import { EmployeeItemComponent } from './pages/employee-list/employee-item/employee-item.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import { ErrorMessagesComponent } from './shared/error-messages/error-messages.component';
 import {DropdownModule} from "primeng/dropdown";
 import {InputSwitchModule} from "primeng/inputswitch";
 import { DialogModule } from 'primeng/dialog';
-
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,11 +52,13 @@ import { DialogModule } from 'primeng/dialog';
     ToastModule,
     DialogModule,
     DropdownModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ConfirmDialogModule
   ],
   providers: [
     provideHttpClient(withFetch()),
-    MessageService
+    MessageService,
+    ConfirmationService
 
   ],
   bootstrap: [AppComponent]
