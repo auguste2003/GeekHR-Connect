@@ -2,25 +2,21 @@
   <div class="col-12">
     <h2 class="text-color-primary">Liste des collaborateurs</h2>
     <p>Voici la liste de vos collaborateurs</p>
-    <p-button  severity="secondary" label="Add Employee" [rounded]="true" ></p-button>
+    <p-button (onClick)="showDialogForAddEmployee()" label="Add Employee" [rounded]="true" ></p-button>
   </div>
   <div class="col-12">
     <div class="flex justify-content-end">
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
-        <!-- Adapte le placholder  -->
         <input type="text" [formControl]="searchControl" placeholder="{{employeeSearchTextPlaceholder}}" pInputText />
       </span>
-      <p-button severity="secondary" (onClick)="menu.toggle($event)" class="ml-2" icon="pi pi-sliders-h"></p-button>
-      <!-- popup cahe les élements du menu  -->
+      <p-button  (onClick)="menu.toggle($event)" class="ml-2" icon="pi pi-sliders-h"></p-button>
       <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
-
     </div>
   </div>
   <div class="col-12">
     <p-divider></p-divider>
   </div>
-  <!-- Lorsque le composant se composant se ferme les employées filtrés sont fermés   -->
   <ng-container *ngIf="(filteredEmployees$ | async) as employees; else loading">
     <ng-container *ngIf="employees.length>0; else noEmployees">
       <div *ngFor="let employee of employees; trackBy: trackById" class="col-12 xl:col-4 md:col-6">
@@ -47,3 +43,114 @@
   <!--Templates End-->
 
 </div>
+
+<!-- Le modal primenNg pour ajouter le champ d'ajout des enployés  -->
+<p-dialog
+  [header]="dialogTitle"
+  [modal]="true"
+  [(visible)]="isEmployeeDialogOn"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '50vw' }"
+  [maximizable]="true"
+  >
+  <p>{{employeeForm.value | json}}</p>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <p-divider align="left" type="solid"> <b>Personal Information</b></p-divider>
+    <div class="grid">
+      <div class="col-12">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="gender">Gender</label>
+          <p-dropdown  formControlName="gender" optionValue="value" id="gender" [options]="genderOptions" optionLabel="label" placeholder="Select gender"></p-dropdown>
+          <small geek-error-messages control="gender" class="p-error"></small>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="firstName">FirstName</label>
+          <input pInputText formControlName="firstName" id="firstName"  />
+          <small geek-error-messages control="firstName" class="p-error"></small>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="lastName">LastName</label>
+          <input formControlName="lastName" pInputText id="lastName"  />
+          <small geek-error-messages control="lastName" class="p-error"></small>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="email">Email</label>
+          <input pInputText formControlName="email" id="email" />
+          <small geek-error-messages control="email" class="p-error"></small>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="dateOfBirth">Date of Birth</label>
+          <input type="date" pInputText formControlName="dateOfBirth" id="dateOfBirth" />
+          <small geek-error-messages control="dateOfBirth" class="p-error"></small>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="position">Position</label>
+          <p-dropdown formControlName="position" optionValue="value" id="position" [options]="positionOptions" optionLabel="label" placeholder="Select position"></p-dropdown>
+          <small geek-error-messages control="position" class="p-error"></small>
+        </div>
+      </div>
+    </div>
+
+    <p-divider align="left" type="solid"> <b>Other Information</b></p-divider>
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="city">City</label>
+          <input pInputText formControlName="city" id="city" />
+          <small geek-error-messages control="city" class="p-error"></small>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="country">Country</label>
+          <input pInputText formControlName="country" id="country" />
+          <small geek-error-messages control="country" class="p-error"></small>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="phone">Phone</label>
+          <input pInputText formControlName="phone" id="phone" />
+          <small geek-error-messages control="phone" class="p-error"></small>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="remainingVacationDays">Remaining Vacation Days</label>
+          <input type="number" pInputText formControlName="remainingVacationDays" id="remainingVacationDays" min="0" />
+          <small geek-error-messages control="remainingVacationDays" class="p-error"></small>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column">
+          <label class="mb-2 required-asterisk" for="onVacation">On Vacation</label>
+          <p-inputSwitch formControlName="onVacation" id="onVacation"></p-inputSwitch>
+          <small geek-error-messages control="onVacation" class="p-error"></small>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Une icon qui est spin de primengNG et qui peut run lorsqu'on appuis sur lui  -->
+    <p-divider></p-divider>   
+    <div class="flex justify-content-end gap-2">
+      <p-button icon="{{isSubmitButtonOn?'pi pi-spin pi-spinner': 'pi pi-send'}}" [disabled]="isSubmitButtonOn" label="Save" type="submit" />
+    </div>
+  </form>
+
+</p-dialog>
