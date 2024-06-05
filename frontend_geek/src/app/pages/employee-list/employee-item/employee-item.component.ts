@@ -15,9 +15,14 @@ export class EmployeeItemComponent {
   @Output()
   public onDelete: EventEmitter<Employee> = new EventEmitter<Employee>();
 
-  
+  // L'évenement qui sera envoyé au parent pour la suppression d'un employé 
   @Output()
   public onEdit: EventEmitter<Employee> = new EventEmitter<Employee>();
+
+  // Évenement qui sera envoyé au parent pour permetre de montrer un employé  
+  @Output()
+  public onShow: EventEmitter<Employee> = new EventEmitter<Employee>();
+
 
   public edit(employee: Employee) { // Lorsqu'on clique sur le boutton , on déclenche l'evenement 
     this.onEdit.emit(employee);
@@ -25,5 +30,9 @@ export class EmployeeItemComponent {
   // Cette méthode joue le meme role que edit . Elle envoit l'employé au parent apres l'évenement 
   public delete(employee: Employee) {
     this.onDelete.emit(employee);
+  }
+  // Envoie de d'employé 
+  public show(employee: Employee): void {
+    this.onShow.emit(employee);
   }
 }
