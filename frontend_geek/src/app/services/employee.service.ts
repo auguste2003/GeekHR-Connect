@@ -36,6 +36,11 @@ export class EmployeeService {
     return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
   }
 
+  // Supression d'un employé 
+  public deleteEmployee(id: UUID): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 
   public createEmployee(employee: Employee): Observable<Employee>{
     return this.http.post<Employee>(`${this.apiUrl}`, employee);

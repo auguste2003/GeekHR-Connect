@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +46,17 @@ export class ValidatorService { // un service de validation des erreurs pour les
     }
 
     return 'Invalid input.';
+  }
+
+  public getFormValidationErrors(form: FormGroup): string {
+    let errorMessages: string = "";
+    Object.keys(form.controls).forEach(key => {  // Prendre la clé qui meme vers un control 
+      const control = form.get(key); // Ici on obtient le controle actuelle 
+      if(control && control.errors){ // vérifier si le control existe 
+        const error = this.getErrorMessage(control); // Récupérer l'ereur spécifique au controle actuel . Un control peut etre un champ de formulaire 
+        errorMessages += `👉${key}: ${error}\n`;
+      }
+    });
+    return errorMessages;
   }
 }
