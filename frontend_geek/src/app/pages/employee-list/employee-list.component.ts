@@ -10,6 +10,8 @@ import { EmployeeSearch } from '../../types/employee-search';
 import { maxAgeDateValidator, minAgeDateValidator, trimValidator } from '../../utils/custom-validator';
 import {  formatDate, getLocalISOTimeString } from '../../utils/utils';
 import { ValidatorService } from '../../services/validator.service';
+import { VoiceSearchService } from '../../services/voice-search.service';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -22,11 +24,13 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   //1)private employeeService: EmployeeService = inject(EmployeeService);
 
   public filteredEmployees$!: Observable<Employee[]>;
+  public dialogOpenState!: 'SHOW' | 'EDIT' | 'ADD';  // Variable qui garde l'état du dialogue 
   public employeeSearchTextPlaceholder: string = "Search by Name...";
   public noEmployeeFound: string = 'no Employees found';
   public loadingMessage: string = 'Loading...';
   public searchControl: FormControl<string> = new FormControl();
 
+  searchQuery: string = '';
 //  public counter:WritableSignal<number> = signal(0);   // utilisaer pour changer les valluer d'une variable en temp réel 
 
 //  derivedCounter:Signal<number> = computed(()=>{
@@ -99,7 +103,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   constructor(private employeeService: EmployeeService,
               private messageService: MessageService,
               private validatorService: ValidatorService,
-              private confirmationService: ConfirmationService) {}
+              private confirmationService: ConfirmationService,
+              private voiceSearchService: VoiceSearchService,
+              private zone: NgZone // Ajoutez cette ligne
+            ) {}
  /**
    * Méthode ngOnInit
    * Appelée lors de l'initialisation du composant
@@ -154,6 +161,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   private initializeForm(): void{  // initialiser le formulaire en utilisant   validations 
     this.employeeForm = new FormGroup({
       id: new FormControl(null),
+      imageURL : new FormControl(null),
       gender: new FormControl(null, [Validators.required, trimValidator]),
       firstName: new FormControl('', [Validators.required, trimValidator]), // Ces validateurs sont des validateurs spécifiques pours créer des composants 
       lastName: new FormControl('', [Validators.required, trimValidator]),
@@ -311,13 +319,38 @@ public openAddDialog(){
   public openEditDialog(employee: Employee): void {
     this.dialogTitle = "Updating employee "+employee.firstName;
     this.isEmployeeDialogOn = true;
-    this.employeeForm.patchValue({
+    this.employeeForm.patchValue({ // Permet de faire une copie conforme de l'employé et de l'envoxer au formulaire 
       ...employee,
       dateOfBirth: formatDate(employee.dateOfBirth),
     });
   }
+  public editMode(): void{
+    this.dialogOpenState = 'EDIT';
+    this.dialogTitle = "Updating employee "+this.employeeForm.value.firstName; // On change le titre 
+    this.employeeForm.enable(); // Activer le bouton 
+  }
 
+  public openShowDialog(employee: Employee): void{
+    this.dialogOpenState = 'SHOW'; // Définir le mode 
+    this.dialogTitle = "Viewing employee "+employee.firstName;
+    this.isEmployeeDialogOn = true;
+    this.employeeForm.patchValue({
+      ...employee,
+      dateOfBirth: formatDate(employee.dateOfBirth),
+      imageURL: employee.imageURL // Ajouter une image uniquement lorsqu'il ajoute 
+    });
+    this.employeeForm.disable(); // Déactiver le formulaire 
+  }
 
-
-
+  startVoiceSearch() {
+    this.voiceSearchService.startListening().then((query: string) => {
+      this.zone.run(() => { // Détecter le changement et integrer avec NGzone des modificateurs asychrones 
+        this.searchControl.setValue(query); // Mettre à jour le champ de recherche avec le texte reconnu
+      });
+    }).catch((error: any) => {
+      console.error('Voice search error:', error);
+      alert('Voice search not supported in this browser.');
+    });
+  }
+  
 }
