@@ -11,11 +11,13 @@ export class HeaderComponent {
   public items: MenuItem[] = [
     {
       label: 'Employee',
-      icon: 'pi pi-home'
+      icon: 'pi pi-home',
+      routerLink: ['/']
     },
     {
       label: 'Company Organisation chart',
-      icon: 'pi pi-th-large'
+      icon: 'pi pi-th-large',
+      routerLink:['/organisation']
     }
   ];
 }
