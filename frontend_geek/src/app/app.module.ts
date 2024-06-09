@@ -25,6 +25,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputSwitchModule} from "primeng/inputswitch";
 import { DialogModule } from 'primeng/dialog';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { OrganizationChartComponent } from './pages/organization-chart/organization-chart.component';
+import { OrganizationChartModule } from 'primeng/organizationchart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     EmployeeListComponent,
     AgePipePipe,
     EmployeeItemComponent,
-    ErrorMessagesComponent
+    ErrorMessagesComponent,
+    OrganizationChartComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     DialogModule,
     DropdownModule,
     InputSwitchModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    OrganizationChartModule
   ],
   providers: [
     provideHttpClient(withFetch()),

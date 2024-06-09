@@ -97,8 +97,12 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
 
   private employeeSearch: EmployeeSearch = 'SearchByName';
   private currentSearchText: string = "";
+  isRecording = false; // Variable d'état pour l'enregistrement
+
   private employees!: Employee[];
   private subscription: Subscription = new Subscription();
+
+  private voiceSearchSubscription!: Subscription;
 
   constructor(private employeeService: EmployeeService,
               private messageService: MessageService,
@@ -125,6 +129,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
    */
   ngOnDestroy(): void { // Arréter la soubscription lorsque le composant est détruit .
     this.subscription.unsubscribe();
+    this.stopVoiceSearch(); // Nettoyer la subscription lors de la destruction du composant
   }
 
 
@@ -308,12 +313,13 @@ export class EmployeeListComponent implements OnInit, OnDestroy{
   }
 
 
-
-public openAddDialog(){
+  public openAddDialog(): void {
+    this.dialogTitle = "Add New Employee";
+    this.dialogOpenState = 'ADD';
+    this.employeeForm.enable();
     this.employeeForm.reset();
     this.isEmployeeDialogOn = true;
   }
-
 
   // Ouverture du dialogue pour le update de l'employé 
   public openEditDialog(employee: Employee): void {
@@ -343,14 +349,34 @@ public openAddDialog(){
   }
 
   startVoiceSearch() {
-    this.voiceSearchService.startListening().then((query: string) => {
-      this.zone.run(() => { // Détecter le changement et integrer avec NGzone des modificateurs asychrones 
-        this.searchControl.setValue(query); // Mettre à jour le champ de recherche avec le texte reconnu
+    if (this.isRecording) {
+      this.stopVoiceSearch();
+    } else {
+      this.isRecording = true;
+      this.voiceSearchSubscription = this.voiceSearchService.startListening().subscribe({
+        next: (query: string) => {
+          this.zone.run(() => {
+            this.searchControl.setValue(query); // Mettre à jour le champ de recherche avec le texte reconnu
+          });
+        },
+        error: (error: any) => {
+          console.error('Voice search error:', error);
+          alert('Voice search not supported in this browser.');
+          this.isRecording = false; // Réinitialiser l'état en cas d'erreur
+        },
+        complete: () => {
+          this.isRecording = false; // Réinitialiser l'état lorsque la recherche est complétée
+          console.log('Voice search completed.');
+        }
       });
-    }).catch((error: any) => {
-      console.error('Voice search error:', error);
-      alert('Voice search not supported in this browser.');
-    });
+    }
   }
-  
+
+  stopVoiceSearch() {
+    if (this.voiceSearchSubscription) {
+      this.voiceSearchSubscription.unsubscribe();
+    }
+    this.isRecording = false;
+  }
+
 }
