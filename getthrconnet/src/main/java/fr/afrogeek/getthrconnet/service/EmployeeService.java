@@ -41,7 +41,7 @@ public class EmployeeService {
         employee.setCity(employeeDetails.getCity());
         employee.setCountry(employeeDetails.getCountry());
         employee.setRemainingVacationDays(employeeDetails.getRemainingVacationDays());
-        employee.setOnVocation(employeeDetails.isOnVocation());
+        employee.setOnVacation(employeeDetails.isOnVacation());
         employee.setPosition(employeeDetails.getPosition());
         return employeeRepository.save(employee);
     }

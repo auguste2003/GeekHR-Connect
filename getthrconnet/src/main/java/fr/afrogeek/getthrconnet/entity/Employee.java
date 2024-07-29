@@ -1,5 +1,6 @@
 package fr.afrogeek.getthrconnet.entity;
 
+import fr.afrogeek.getthrconnet.enums.Gender;
 import fr.afrogeek.getthrconnet.enums.Position;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ public class Employee {
     @Id
     @GeneratedValue  // Valeur générée automatiquement
     private UUID id;
+    @Column(nullable = false)
+    private Gender gender ;
 
     @Column(nullable = false)
     private String firstName;
@@ -36,8 +39,6 @@ public class Employee {
     @Column(nullable = false,unique = true)
     private String phone;
 
-    @Column(nullable = false)
-    private String gender ;
 
     @Column(nullable = false)
     private LocalDateTime dateOfBirth;
@@ -52,7 +53,7 @@ public class Employee {
     private int remainingVacationDays ;
 
     @Column(nullable = false)
-    private boolean isOnVocation ;
+    private boolean isOnVacation ;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING) // Enrégistrer des valeurs

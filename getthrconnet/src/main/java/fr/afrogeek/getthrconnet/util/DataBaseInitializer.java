@@ -1,9 +1,14 @@
 package fr.afrogeek.getthrconnet.util;
 
 import fr.afrogeek.getthrconnet.entity.Employee;
+import fr.afrogeek.getthrconnet.entity.User;
+import fr.afrogeek.getthrconnet.enums.Gender;
 import fr.afrogeek.getthrconnet.enums.Position;
+import fr.afrogeek.getthrconnet.enums.Role;
 import fr.afrogeek.getthrconnet.repository.EmployeeRepository;
+import fr.afrogeek.getthrconnet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.boot.CommandLineRunner;
 
@@ -20,6 +25,8 @@ public class DataBaseInitializer implements CommandLineRunner {
 
     private final EmployeeRepository employeeRepository;
     private static final Random RANDOM = new Random();
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -29,6 +36,7 @@ public class DataBaseInitializer implements CommandLineRunner {
             Employee employee = generateEmployee(position, i);
             employeeRepository.save(employee);
         }
+        createTestUser(); // Tester avec un user
     }
 
     private Employee generateEmployee(Position position, int index) {
@@ -41,14 +49,14 @@ public class DataBaseInitializer implements CommandLineRunner {
         };
         String[] lastNames = {
                 "Fotso", "Kamga", "Mbappe", "Elong", "Nkodo", "Djomo", "Kouam", "Mbianda", "Ngounou", "Tsogo",
-                "Ndi", "Tcham", "Essomba", "Fouda", "Mbarga", "Biya", "Nguini", "Tataw", "Libii",
+                "Ndi", "Tcham", "Essomba", "Fouda", "Mbarga", "Ngalle", "Biya", "Nguini", "Tataw", "Libii",
                 "Milla", "Toko", "Ekambi", "Kunde", "Onana", "Fai", "Banana", "Zobo", "Tabi", "Yaya",
                 "Ngalle", "Mouelle", "Kotto", "Lottin", "Ntamack", "Ngapeth", "Moundi", "Ndjana", "Tambe", "Achidi",
-                "Ngum", "Foe", "Wome", "Nlend","Ndongo", "Ngo", "Ekotto", "Abega", "Mbida", "Emana", "Onguene"
+                "Ngum", "Foe", "Wome", "Nlend", "Ngo", "Ekotto", "Abega", "Mbida", "Emana", "Onguene"
         };
         String[] cities = {"Yaoundé", "Douala", "Bamenda", "Garoua", "Maroua", "Nkongsamba", "Buea", "Ngaoundéré", "Kumba", "Limbe", "Addis Abeba", "Cairo", "Cape Town", "Lagos", "Nairobi"};
         String[] countries = {"Cameroun", "Nigeria", "Ghana", "Kenya", "Égypte", "Afrique du Sud", "Tanzanie", "Côte d'Ivoire", "Sénégal", "Ethiopie", "Maroc", "Algérie", "Uganda", "Mali", "Zimbabwe"};
-        String[] genders = {"Male", "Female"};
+        Gender[] genders = {Gender.men, Gender.women};
         String firstName = firstNames[index];
         String lastName = lastNames[index];
         String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com";
@@ -57,11 +65,25 @@ public class DataBaseInitializer implements CommandLineRunner {
         LocalDateTime dateOfBirth = LocalDateTime.of(1970 + RANDOM.nextInt(50), 1 + RANDOM.nextInt(12), 1 + RANDOM.nextInt(28), 0, 0);
         String city = cities[RANDOM.nextInt(cities.length)];
         String country = countries[RANDOM.nextInt(countries.length)];
-        String gender = genders[RANDOM.nextInt(genders.length)];
+        Gender gender = genders[RANDOM.nextInt(genders.length)];
 
         int remainingVacationDays = 5 + RANDOM.nextInt(25);
         boolean isOnVacation = RANDOM.nextBoolean();
 
         return new Employee(UUID.randomUUID(), gender, firstName, lastName, email, phone, dateOfBirth, city, country, remainingVacationDays, isOnVacation, position);
+    }
+
+    private void createTestUser(){
+        User admin = User.builder()
+                .email("admin@gmail.com")
+                .role(Role.ADMIN)
+                .password(passwordEncoder.encode("ADMIN@GMAIL.COM2024")).build();
+        User user = User.builder()
+                .email("user@gmail.com")
+                .role(Role.USER)
+                .password(passwordEncoder.encode("USER@GMAIL.COM2024")).build();
+
+        userRepository.save(admin);
+        userRepository.save(user);
     }
 }
